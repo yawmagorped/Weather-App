@@ -1,3 +1,105 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
 body {
     background-color: gray;
+}
+
+.container {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.header {
+    display: flex;
+    justify-content: center;
+    font-size: xx-large;
+    padding: 10px;
+    background-color: rgb(127, 127, 255);
+}
+
+.middle {
+    display: flex;
+    flex-direction: column;
+    flex: 1;     
+}
+
+.search {
+    padding:10px 0px;
+    display: flex;
+    gap: 5px;
+}
+
+.search > button {
+    padding: 0px 10px;
+}
+
+.search > input {
+    width: 300px;
+}
+
+.search > input, .search > button {
+    border-radius: 10px;
+    border: none;
+    height: 32px;
+}
+
+.body {
+    display: flex;
+    justify-content: space-between;
+    background-color: #9b9b9b;
+}
+
+.body-left {
+    flex: 1;
+    padding: 200px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    justify-items: center;
+    align-items: center;
+    grid-template-areas: 
+    "c t"
+    "d d"
+    "s1 s2";
+
+    font-size: x-large;
+    text-align: center;
+}
+
+.body-left > .w-conditions {
+    grid-area: c;
+}
+
+.body-left > .w-temp {
+    grid-area: t;
+}
+
+.body-left > .w-description {
+    grid-area: d;
+}
+
+.body-left > .w-sunrise {
+    grid-area: s1;
+}
+
+.body-left > .w-sunset {
+    grid-area: s2;
+}
+
+
+.body-right > img {
+    height: 1000px;
+}
+
+.footer {
+    background-color: #5a5a5a;
+}
+
+.footer, .header , .search{
+    display: flex;
+    justify-content: center;
 }
