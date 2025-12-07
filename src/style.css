@@ -59,15 +59,24 @@ body {
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr 1fr 1fr;
-    justify-items: center;
-    align-items: center;
+    justify-items: stretch;
+    align-items: stretch;
+    gap: 1px;
     grid-template-areas: 
     "c t"
     "d d"
-    "s1 s2";
+    "s1 s2"
+    "f f";
 
     font-size: x-large;
     text-align: center;
+}
+
+.body-left > * {
+    outline: black 1px solid;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .body-left > .w-conditions {
@@ -90,9 +99,20 @@ body {
     grid-area: s2;
 }
 
+.body-left > .forecast {
+    grid-area: f;
+    display: grid;
+    grid-auto-flow: column;
+    grid-template-columns: repeat(7, 1fr);
+    grid-template-rows: 1fr 1fr;
+}
 
 .body-right > img {
     height: 1000px;
+}
+
+.title {
+    background-color: aqua;
 }
 
 .footer {
