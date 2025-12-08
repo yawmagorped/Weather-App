@@ -8,7 +8,7 @@ import {
 
 function getWeatherInfo(cityName) {
     return new Promise( (resolove) => { 
-        fetch(`https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${cityName}?key=KVD85U3K57WFPHZ3B9XDQ3G38`)
+        fetch(`https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${cityName}?key=KVD85U3K57WFPHZ3B9XDQ3G38&unitGroup=metric`)
         .then(function(response) {
             return response.json();
         })
@@ -26,7 +26,7 @@ button.addEventListener('click', () => {
 });
 
 function weekdayString(dayOfTheWeek) {
-    switch (dayOfTheWeek) {
+    switch (dayOfTheWeek % 7) {
         case 0:
             return "Sunday";
             break;
@@ -70,7 +70,7 @@ async function displayWeatherInfo(cityName) {
 
     
     conditions.textContent = weatherInfo.currentConditions.conditions;
-    temp.textContent = `${weatherInfo.currentConditions.temp}F (feels like:${weatherInfo.currentConditions.feelslike}F)`;
+    temp.textContent = `${weatherInfo.currentConditions.temp}C (feels like:${weatherInfo.currentConditions.feelslike}C)`;
     description.textContent = weatherInfo.description;
     sunrise.textContent = `sunrise: ${weatherInfo.currentConditions.sunrise}`;
     sunset.textContent = `sunset: ${weatherInfo.currentConditions.sunset}`;
@@ -81,11 +81,18 @@ async function displayWeatherInfo(cityName) {
         counter++;
         title.textContent = weekdayString(counter);
     });
+    titles[0].textContent = "Tomorrow";
+
     counter = today;
 
     descriptions.forEach(description => {
-        description.textContent = weatherInfo.days[counter].conditions;
+        let img = description.querySelector("img");
         counter++;
+        img.alt = weatherInfo.days[counter].conditions;
+        import(`./images/weatherIcons/${weatherInfo.days[counter].icon}.png`).then(function(response) {
+            console.log(response);
+            img.src = response.default;
+        })
+        description.append(img);
     });
 }
-

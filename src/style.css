@@ -55,7 +55,13 @@ body {
 
 .body-left {
     flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.body-upper-left {
     padding: 200px;
+    padding-bottom: 0px;
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr 1fr 1fr;
@@ -65,46 +71,56 @@ body {
     grid-template-areas: 
     "c t"
     "d d"
-    "s1 s2"
-    "f f";
+    "s1 s2";
 
     font-size: x-large;
     text-align: center;
 }
 
-.body-left > * {
+.body-upper-left > * {
     outline: black 1px solid;
     display: flex;
     align-items: center;
     justify-content: center;
+    padding: 60px 10px;
 }
 
-.body-left > .w-conditions {
+.body-upper-left > .w-conditions {
     grid-area: c;
 }
 
-.body-left > .w-temp {
+.body-upper-left > .w-temp {
     grid-area: t;
 }
 
-.body-left > .w-description {
+.body-upper-left > .w-description {
     grid-area: d;
 }
 
-.body-left > .w-sunrise {
+.body-upper-left > .w-sunrise {
     grid-area: s1;
 }
 
-.body-left > .w-sunset {
+.body-upper-left > .w-sunset {
     grid-area: s2;
 }
 
-.body-left > .forecast {
+.forecast {
+    margin-left: 200px;
     grid-area: f;
+    gap: 1px;
     display: grid;
     grid-auto-flow: column;
     grid-template-columns: repeat(7, 1fr);
-    grid-template-rows: 1fr 1fr;
+    grid-template-rows: 1fr 2fr;
+    
+    background: #2A7B9B;
+    background: linear-gradient(90deg,rgba(42, 123, 155, 1) 0%, rgba(42, 155, 123, 0.86) 66%, rgba(222, 157, 38, 0.29) 100%);
+}
+
+.forecast > * {
+    outline: black 1px solid;
+    padding: 20px;
 }
 
 .body-right > img {
@@ -112,7 +128,9 @@ body {
 }
 
 .title {
-    background-color: aqua;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .footer {
