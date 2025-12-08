@@ -33,6 +33,10 @@ body {
     gap: 5px;
 }
 
+.search > img {
+    height: 32px;
+}
+
 .search > button {
     padding: 0px 10px;
 }
@@ -60,8 +64,7 @@ body {
 }
 
 .body-upper-left {
-    padding: 200px;
-    padding-bottom: 0px;
+    padding: 100px 100px 1px 200px;
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr 1fr 1fr;
@@ -69,6 +72,7 @@ body {
     align-items: stretch;
     gap: 1px;
     grid-template-areas: 
+    "C C"
     "c t"
     "d d"
     "s1 s2";
@@ -83,6 +87,12 @@ body {
     align-items: center;
     justify-content: center;
     padding: 60px 10px;
+}
+
+.body-upper-left > .w-cityName {
+    grid-area: C;
+    font-size: larger;
+    font-weight: bold;
 }
 
 .body-upper-left > .w-conditions {
@@ -140,4 +150,8 @@ body {
 .footer, .header , .search{
     display: flex;
     justify-content: center;
+}
+
+.waiting {
+    background-color: red;
 }
