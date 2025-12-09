@@ -80,8 +80,8 @@ async function displayWeatherInfo(cityName) {
     let weatherInfo = await getWeatherInfo(cityName);
 
     let address = display.querySelector(".w-cityName");
-    let conditions = display.querySelector(".w-conditions");
-    let temp = display.querySelector(".w-temp");
+    let conditions = display.querySelector(".w-conditions > span");
+    let temp = display.querySelector(".w-temp :first-child");
     let description = display.querySelector(".w-description");
     let sunrise = display.querySelector(".w-sunrise");
     let sunset = display.querySelector(".w-sunset");
@@ -89,12 +89,15 @@ async function displayWeatherInfo(cityName) {
     let titles = display.querySelectorAll(".title");
     let descriptions = display.querySelectorAll(".description");
 
-    console.log(titles);
-    console.log(descriptions);
-
     address.textContent = weatherInfo.resolvedAddress;
     conditions.textContent = weatherInfo.currentConditions.conditions;
-    temp.textContent = `${weatherInfo.currentConditions.temp}C (feels like:${weatherInfo.currentConditions.feelslike}C)`;
+
+    import(`./images/weatherIcons/${weatherInfo.currentConditions.icon}.png`).then(function(response) {
+        conditions.previousElementSibling.src = response.default;
+    })
+
+    temp.textContent = `${weatherInfo.currentConditions.temp}C`
+    temp.nextElementSibling.textContent = `(feels like:${weatherInfo.currentConditions.feelslike}C)`;
     description.textContent = weatherInfo.description;
     sunrise.textContent = `sunrise: ${weatherInfo.currentConditions.sunrise}`;
     sunset.textContent = `sunset: ${weatherInfo.currentConditions.sunset}`;
@@ -110,14 +113,18 @@ async function displayWeatherInfo(cityName) {
     counter = today;
 
     descriptions.forEach(description => {
-        let img = description.querySelector("img");
+        let forecastImg = description.querySelector("img");
+        if (!forecastImg.nextElementSibling) {
+            let forecastTxtElement = document.createElement("div");
+            forecastImg.after(forecastTxtElement);
+        }
         counter++;
-        img.alt = weatherInfo.days[counter].conditions;
+        
+        forecastImg.nextElementSibling.textContent = `${weatherInfo.days[counter].temp}C`;
+        forecastImg.alt = weatherInfo.days[counter].conditions;
         import(`./images/weatherIcons/${weatherInfo.days[counter].icon}.png`).then(function(response) {
-            console.log(response);
-            img.src = response.default;
+            forecastImg.src = response.default;
         })
-        description.append(img);
     });
     loadingDisplay(0);
 }
